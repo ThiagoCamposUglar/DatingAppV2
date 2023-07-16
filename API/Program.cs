@@ -1,20 +1,13 @@
 //Esse é o primeiro arquivo que vai rodar na api
-
-using API.Data;
-using Microsoft.EntityFrameworkCore;
+using API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-
-builder.Services.AddDbContext<DataContext>(options => 
-{
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));//Pega do appsettings.json
-});
-
-builder.Services.AddCors();//adicionando cors
+builder.Services.AddAplicationServices(builder.Configuration);
+builder.Services.AddIdentityServices(builder.Configuration);
 
 var app = builder.Build();
 
@@ -30,6 +23,9 @@ var app = builder.Build();
 //app.UseAuthorization(); Não ta usando ainda
 
 app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 
