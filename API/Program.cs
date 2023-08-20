@@ -1,5 +1,6 @@
 //Esse é o primeiro arquivo que vai rodar na api
 using API.Extensions;
+using API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddIdentityServices(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseMiddleware<ExceptionMiddleware>();
 
 //Comentei isso aqui pq um dia pode ser útil
 // if (app.Environment.IsDevelopment()) 
