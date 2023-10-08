@@ -24,8 +24,6 @@ app.UseMiddleware<ExceptionMiddleware>();
 //     app.UseSwaggerUI();
 // }
 
-//app.UseAuthorization(); Não ta usando ainda
-
 app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
 
 app.UseAuthentication();
