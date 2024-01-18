@@ -18,7 +18,8 @@ namespace API.Helpers
             CreateMap<RegisterDto, AppUser>();
             CreateMap<Message, MessageDto>()
                 .ForMember(d => d.SenderPhotoUrl, o => o.MapFrom(s => s.Sender.Photos.FirstOrDefault(x => x.IsMain).Url))
-                .ForMember(d => d.RecipientPhotoUrl, o => o.MapFrom(s => s.Recipient.Photos.FirstOrDefault(x => x.IsMain).Url));
+                .ForMember(d => d.RecipientPhotoUrl, o => o.MapFrom(s => s.Recipient.Photos.FirstOrDefault(x => x.IsMain).Url));//O chatGpt sugeriu fazer o mapping da data direto na propriedade que eu quero
+            //CreateMap<DateTime, DateTime>().ConstructUsing(d => DateTime.SpecifyKind(d, DateTimeKind.Utc)); Por algum motivo maior isso quebra tudo
         }
     }
 }

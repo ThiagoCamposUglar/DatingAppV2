@@ -44,7 +44,6 @@ namespace API.Controllers
         public async Task<ActionResult<MemberDto>> GetUser(string userName)//Task representa uma operação assíncrona que pode retornar um valor
         {
             return await _userRepository.GetMemberAsync(userName);
-
         }
 
         [HttpPut]

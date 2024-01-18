@@ -21,11 +21,11 @@ export class ErrorInterceptor implements HttpInterceptor {
         if(error){
           switch(error.status){
             case 400:
-              if(error.error.errors){
+              if(error.error){
                 const modelStateErrors = [];
-                for(const key in error.error.errors){
-                  if(error.error.errors[key]){
-                    modelStateErrors.push(error.error.errors[key])
+                for(const key in error.error){
+                  if(error.error[key]){
+                    modelStateErrors.push(error.error[key]["description"])
                   }
                 }
                 throw modelStateErrors.flat();
@@ -35,6 +35,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               }
               break;
               case 401:
+                debugger;
                 this.toastr.error('Unauthorized', error.status.toString());
                 break;
               case 404:
